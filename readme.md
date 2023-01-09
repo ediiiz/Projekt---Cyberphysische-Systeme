@@ -60,33 +60,29 @@ Der Projektplan für die Realisierung des Klassenraumlärm-Überwachungssystems 
 1. Woche: Programmierung der Microcontroller und Sensoren sowie Einrichtung und Konfiguration des mqtt brokers und der MySQL-Datenbank.
 2. Woche: Entwicklung der selbstprogrammierten Anwendung und Programmierung der Aktoren. Erstellung der Web-App. Integration und Test aller Komponenten. Deployment im Klassenraum.
 
-## 7. Zusammenfassung
-
-Das Klassenraumlärm-Überwachungssystem ist eine Automatisierung und Steuerung, die dazu beitragen soll, die Konzentration und Leistungsfähigkeit der Schüler zu fördern und den Unterrichtsablauf zu verbessern. Das System wird die Lautstärke im Klassenraum messen und die Schüleraktivität überwachen. Es wird möglich sein, Sollwerte für die Lautstärke im Klassenraum festzulegen. Die Sensordaten werden mittels Microcontrollern und Sensoren gemessen und übertragen. Die Übertragung der Sensordaten wird mittels WLAN, LAN oder 2,4 GHz Funk erfolgen. Die Sensordaten werden mit einem mqtt broker erfasst und in einer MySQL-Datenbank gespeichert. Die Sensordaten werden in einer selbstprogrammierten Anwendung verarbeitet und Sollwerte ermittelt. Die Sollwerte werden an Aktoren im Klassenraum übertragen, um die Lautstärke zu steuern. Der aktuelle Zustand und der zeitliche Verlauf der Lautstärke im Klassenraum werden visualisiert und im Browser interagiert werden können. Das System wird in mehreren Schritten implementiert, wobei jeder Schritt sorgfältig geplant und überwacht wird, um mögliche Risiken zu minimieren. Das Projekt wird innerhalb von 3 Wochen abgeschlossen sein.
-
-
+### Gantt Diagramm
 
 ```mermaid
 gantt
     title Überwachung und Steuerung des Klassenraumlärms
     dateFormat  YYYY-MM-DD
     section Anforderungsanalyse
-    Anforderungen festlegen              :des1, 2023-01-09, 1d
-    Nutzen für Schüler und Lehrer ermitteln    :des2, 2023-01-09, 2d
+    Anforderungen festlegen         :des1, 2023-01-09, 2d
 
     section Systemarchitektur
     Komponenten festlegen           :des3, 2023-01-11, 1d
-    Interaktionen beschreiben        :des4, 2023-01-11, 1d
+    Interaktionen beschreiben       :des4, 2023-01-11, 1d
 
     section Funktionsbeschreibung
     Funktionsweise der Komponenten beschreiben  :des5, 2023-01-12, 1d
     Zusammenarbeit der Komponenten beschreiben  :des6, 2023-01-12, 1d
 
     section Implementierung
-    Software installieren          :des8, 2023-01-13, 0.5d
+    Software installieren          :des8, 2023-01-12, 1d
+    Hardware zusammenbauen         :des7, 2023-01-13, 1d
     Grundfunktionen implementieren :des9, 2023-01-13, 2w
     Funktionstests durchführen    :des10, 2023-01-27, 3d
-    Fehlerbehebung                :des11, 2023-01-27, 3d
+    Fehlerbehebung durchführen    :des11, 2023-01-27, 3d
 
     section Dokumentation
     Benutzerdokumentation erstellen :des12, 2023-01-09, 3w
@@ -95,3 +91,7 @@ gantt
     section Projektabschluss
     Projekt abschließen           :des14, 2023-02-01, 1d
 ```
+
+## 7. Zusammenfassung
+
+Das Klassenraumlärm-Überwachungssystem ist eine Automatisierung und Steuerung, die dazu beitragen soll, die Konzentration und Leistungsfähigkeit der Schüler zu fördern und den Unterrichtsablauf zu verbessern. Das System wird die Lautstärke im Klassenraum messen und die Schüleraktivität überwachen. Es wird möglich sein, Sollwerte für die Lautstärke im Klassenraum festzulegen. Die Sensordaten werden mittels Microcontrollern und Sensoren gemessen und übertragen. Die Übertragung der Sensordaten wird mittels WLAN, LAN oder 2,4 GHz Funk erfolgen. Die Sensordaten werden mit einem mqtt broker erfasst und in einer MySQL-Datenbank gespeichert. Die Sensordaten werden in einer selbstprogrammierten Anwendung verarbeitet und Sollwerte ermittelt. Die Sollwerte werden an Aktoren im Klassenraum übertragen, um die Lautstärke zu steuern. Der aktuelle Zustand und der zeitliche Verlauf der Lautstärke im Klassenraum werden visualisiert und im Browser interagiert werden können. Das System wird in mehreren Schritten implementiert, wobei jeder Schritt sorgfältig geplant und überwacht wird, um mögliche Risiken zu minimieren. Das Projekt wird innerhalb von 3 Wochen abgeschlossen sein.
