@@ -1,0 +1,488 @@
+[
+    {
+        "id": "b03429e7e7eaae3a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "09232a7f8f0f9310",
+        "type": "mqtt in",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "topic": "soundlevelmeter/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c5d6c34d34cc8d9c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "ab07cfc0103bc225",
+                "7a518590831c23ed",
+                "08b8153075154f8a",
+                "72d87b9abef15e1c"
+            ]
+        ]
+    },
+    {
+        "id": "7a518590831c23ed",
+        "type": "ui_chart",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "group": "b1f96645bb700f2d",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "cubic",
+        "nodata": "",
+        "dot": false,
+        "ymin": "26",
+        "ymax": "45",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab07cfc0103bc225",
+        "type": "ui_gauge",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "group": "b1f96645bb700f2d",
+        "order": 1,
+        "width": "18",
+        "height": "5",
+        "gtype": "gage",
+        "title": "Aktuelle Lautstaerke in dB",
+        "label": "dB",
+        "format": "{{value}}",
+        "min": "26",
+        "max": "32",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1010,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "be834d14373fb737",
+        "type": "ui_audio",
+        "z": "b03429e7e7eaae3a",
+        "name": "Leise sein",
+        "group": "b1f96645bb700f2d",
+        "voice": "Microsoft Leni Online (Natural) - German (Switzerland)",
+        "always": true,
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "08b8153075154f8a",
+        "type": "switch",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "30",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 560,
+        "wires": [
+            [
+                "2c6f702676809499"
+            ]
+        ]
+    },
+    {
+        "id": "e9830b63fe7e8ab7",
+        "type": "change",
+        "z": "b03429e7e7eaae3a",
+        "name": "Aufforderung",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Seit bitte still",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 440,
+        "wires": [
+            [
+                "be834d14373fb737"
+            ]
+        ]
+    },
+    {
+        "id": "eaba593c90f2d01e",
+        "type": "function",
+        "z": "b03429e7e7eaae3a",
+        "name": "function 1",
+        "func": "let count = flow.get('count') || 0\nflow.set('count',++count )\nif (flow.get('count') >= 5) {\n    flow.set('count', 0)\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 560,
+        "wires": [
+            [
+                "625ffdca804e1184"
+            ]
+        ]
+    },
+    {
+        "id": "2c6f702676809499",
+        "type": "delay",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 560,
+        "wires": [
+            [
+                "eaba593c90f2d01e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "625ffdca804e1184",
+        "type": "delay",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 2,
+        "x": 680,
+        "y": 460,
+        "wires": [
+            [
+                "e9830b63fe7e8ab7"
+            ],
+            [
+                "5a2fa3a0f10ed3b4"
+            ]
+        ]
+    },
+    {
+        "id": "5a2fa3a0f10ed3b4",
+        "type": "function",
+        "z": "b03429e7e7eaae3a",
+        "name": "function 2",
+        "func": "let count = flow.get('count') || 0\nnode.warn('second:' + count);\nflow.set('count',0 )",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cfdaa08a365fa06d",
+        "type": "mysql",
+        "z": "b03429e7e7eaae3a",
+        "mydb": "e252125b61a83c45",
+        "name": "",
+        "x": 1070,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8428c22c387d653d",
+        "type": "function",
+        "z": "b03429e7e7eaae3a",
+        "name": "function 3",
+        "func": "let room = flow.get('room')\n\nif (msg.payload === 'drop') {\n    msg.topic = \"DROP TABLE Decibel;DROP Table Room;\"\n    return msg;\n}\n\nif (msg.payload === 'init_room') {\n    \n    let dbQuery = `INSERT INTO Room (name) VALUES (${room});`\n    msg.topic = dbQuery\n    return msg;\n}\n\nif (msg.payload === 'init_db') {\n    let dbQuery = \"CREATE TABLE`Room`(`name` VARCHAR(191) NOT NULL, `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3), UNIQUE INDEX`Room_name_key`(`name`), PRIMARY KEY(`name`)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;CREATE TABLE`Decibel`(`id` VARCHAR(191) NOT NULL, `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3), `value` INTEGER NOT NULL, `roomName` VARCHAR(191) NULL, PRIMARY KEY(`id`)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;ALTER TABLE `Decibel` ADD CONSTRAINT `Decibel_roomName_fkey` FOREIGN KEY(`roomName`) REFERENCES`Room`(`name`) ON DELETE SET NULL ON UPDATE CASCADE;\"\n    msg.topic = dbQuery\n    return msg;\n}\n\nlet data = msg.payload\nlet dbQuery = `INSERT INTO Decibel (id, value, roomName) VALUES (UUID(),${data}, ${room});`\nmsg.topic = dbQuery\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 760,
+        "wires": [
+            [
+                "cfdaa08a365fa06d"
+            ]
+        ]
+    },
+    {
+        "id": "ada2f4b9fd9f154c",
+        "type": "inject",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.6",
+        "topic": "",
+        "payload": "init_db",
+        "payloadType": "str",
+        "x": 130,
+        "y": 760,
+        "wires": [
+            [
+                "8428c22c387d653d"
+            ]
+        ]
+    },
+    {
+        "id": "1b7d14c4a1ceae38",
+        "type": "inject",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.7",
+        "topic": "",
+        "payload": "init_room",
+        "payloadType": "str",
+        "x": 140,
+        "y": 820,
+        "wires": [
+            [
+                "8428c22c387d653d"
+            ]
+        ]
+    },
+    {
+        "id": "bdb56b9fc0cb4130",
+        "type": "inject",
+        "z": "b03429e7e7eaae3a",
+        "name": "Setze den Raum",
+        "props": [
+            {
+                "p": "payload.room",
+                "v": "27",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0",
+        "topic": "",
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "4aad7b278a5d2a8b"
+            ]
+        ]
+    },
+    {
+        "id": "4aad7b278a5d2a8b",
+        "type": "function",
+        "z": "b03429e7e7eaae3a",
+        "name": "Raum setzen",
+        "func": "flow.set('room', msg.payload.room)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "72d87b9abef15e1c",
+        "type": "delay",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 620,
+        "wires": [
+            [
+                "8428c22c387d653d"
+            ]
+        ]
+    },
+    {
+        "id": "6f2695f19e5c2c68",
+        "type": "inject",
+        "z": "b03429e7e7eaae3a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.2",
+        "topic": "",
+        "payload": "drop",
+        "payloadType": "str",
+        "x": 130,
+        "y": 880,
+        "wires": [
+            [
+                "8428c22c387d653d"
+            ]
+        ]
+    },
+    {
+        "id": "c5d6c34d34cc8d9c",
+        "type": "mqtt-broker",
+        "name": "mqtt",
+        "broker": "smarthome-mqtt",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b1f96645bb700f2d",
+        "type": "ui_group",
+        "name": "",
+        "tab": "e9731c06f9e147e9",
+        "order": 1,
+        "disp": true,
+        "width": "18",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e252125b61a83c45",
+        "type": "MySQLdatabase",
+        "name": "projektLaerm",
+        "host": "smartthome-mysql",
+        "port": "3306",
+        "db": "projektLaerm",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "e9731c06f9e147e9",
+        "type": "ui_tab",
+        "name": "Lärm",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": true
+    }
+]

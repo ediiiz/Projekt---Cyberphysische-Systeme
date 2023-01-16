@@ -1,0 +1,55 @@
+version: "3.7"
+
+services:
+  node-red:
+    image: nodered/node-red:latest
+    container_name: smarthome-nodered
+    restart: always
+    environment:
+      - TZ=Europe/Amsterdam
+    ports:
+      - "1880:1880"
+    networks:
+      - smart-home-net
+    volumes:
+      - node-red-data:/data
+  mysql:
+    image: mysql:8.0
+    container_name: smartthome-mysql
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=projektLaerm
+      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjj
+    ports:
+      - "3306:3306"
+    networks:
+      - smart-home-net
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: smarthome-mqtt
+    restart: always
+    volumes:
+      - mqtt-config:/mosquitto/config
+      - mqtt-data:/mosquitto/data
+      - mqtt-logs:/mosquitto/log
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    networks:
+      - smart-home-net
+
+volumes:
+  node-red-data:
+  db:
+    driver: local
+  mqtt-config:
+  mqtt-data:
+  mqtt-logs:
+
+networks:
+  smart-home-net:
