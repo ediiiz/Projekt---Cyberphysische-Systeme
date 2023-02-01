@@ -1,3 +1,6 @@
+// Definition: This code is used to read the sound level from the microphone and send it to the MQTT broker.
+
+
 #include <ESP8266WiFi.h>
 #include <SPI.h>
 #include <Wire.h>
